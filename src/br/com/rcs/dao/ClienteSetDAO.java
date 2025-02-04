@@ -1,4 +1,4 @@
-package br.com.rcs.dao;
+/*package br.com.rcs.dao;
 
 import br.com.rcs.domain.Cliente;
 
@@ -59,6 +59,6 @@ public class ClienteSetDAO implements IClienteDAO {
         return this.set;
     }
 }
-
+*/
 
 

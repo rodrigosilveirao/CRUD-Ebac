@@ -12,7 +12,7 @@ public class Cliente {
     private String cidade;
     private String estado;
 
-    public Cliente(String nome, String cpf, String tel, String end, String numero, String cidade, String estado){
+    public Cliente(String nome, String cpf, String tel, String end, String numero, String cidade){
         this.nome = nome;
         this.cpf = Long.valueOf(cpf.trim());
         this.tel = Long.valueOf(tel.trim());
@@ -79,27 +79,16 @@ public class Cliente {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj){
-            return true;
-        }
-        if (obj == null){
-            return false;
-        }
-        if (getClass() != obj.getClass()){
-            return false;
-        }
-        final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.cpf, other.cpf)){
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(cpf, cliente.cpf);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.cpf);
-        return hash;
+        return Objects.hash(cpf);
     }
 
     @Override
