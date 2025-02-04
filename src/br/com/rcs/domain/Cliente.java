@@ -79,15 +79,27 @@ public class Cliente {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(cpf, cliente.cpf);
+    public boolean equals(Object obj) {
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
+        if (getClass() != obj.getClass()){
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (!Objects.equals(this.cpf, other.cpf)){
+            return false;
+        }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(cpf);
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.cpf);
+        return hash;
     }
 
     @Override
