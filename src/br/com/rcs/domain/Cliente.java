@@ -1,3 +1,5 @@
+package br.com.rcs.domain;
+
 import java.util.Objects;
 
 public class Cliente {
@@ -86,5 +88,13 @@ public class Cliente {
     @Override
     public int hashCode() {
         return Objects.hashCode(cpf);
+    }
+
+    @Override
+    public String toString() {
+        return "br.com.rcs.domain.Cliente{" +
+                "cpf=" + cpf +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }
