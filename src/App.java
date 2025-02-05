@@ -15,6 +15,14 @@ public class App {
                 "Digite 1 para cadastro, 2 para colsultar, 3 para exclusão,4 para alteracão ou 5 para sair",
                 "Cadastro", JOptionPane.INFORMATION_MESSAGE);
 
+        while (!isOpcaoValida(opcao)) {
+            if ("".equals(opcao)) {
+                sair();
+            }
+            opcao = JOptionPane.showInputDialog(null,
+                    "> Opção inválida < Digite 1 para cadastro, 2 para consulta, 3 para cadastro, 4 para alteração ou 5 para sair",
+                    "Green dinner", JOptionPane.INFORMATION_MESSAGE);
+        }
 
         while (!isOpcaoValida(opcao)) {
             if ("".equals(opcao)) {
@@ -28,17 +36,29 @@ public class App {
                 String dados = JOptionPane.showInputDialog(null, "Digite o CPF do cliente",
                         "Consulta cliente", JOptionPane.INFORMATION_MESSAGE);
                 consultar(dados);
-            } else if (isExclusao(opcao)) {
-                String dados = JOptionPane.showInputDialog(null, "Digite o CPF do cliente",
-                        "Consulta cliente", JOptionPane.INFORMATION_MESSAGE);
-                excluir(dados);
-            }
+            }else
+                opcao = JOptionPane.showInputDialog(null,
+                    "Digite 1 para cadastro, 2 para consulta, 3 para cadastro, 4 para alteração ou 5 para sair",
+                    "Green dinner", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 
+    private static void consultar(String dados) {
+        Cliente cliente = iClienteDAO.consultar(Long.parseLong(dados));
+        if (cliente != null) {
+            JOptionPane.showMessageDialog(null, "Cliente encontrado com sucesso" + cliente.toString(),"sucesso",JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado", "ERRO", JOptionPane.INFORMATION_MESSAGE);
+        }
 
-    private static boolean isCadastro(String opcao) {
-        return "1".equals(opcao);
+    }
+
+    private static boolean isConsulta(String opcao) {
+        if ("2".equals(opcao)){
+        return true;
+        }
+        return false;
     }
 
     private static void cadastrar(String dados) {
@@ -53,35 +73,11 @@ public class App {
     }
 
 
-    private static boolean isConsulta(String opcao) {
-        return "2".equals(opcao);
-    }
-
-    private static void consultar(String dados) {
-        Cliente cliente = iClienteDAO.consultar(Long.parseLong(dados));
-        if (cliente != null) {
-            JOptionPane.showMessageDialog(null, "Cliente encontrado com sucesso" + cliente.toString(),"sucesso",JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado", "ERRO", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-    }
-
-    private static boolean isExclusao(String opcao) {
-        if ("3".equals(opcao)) {
+    private static boolean isCadastro(String opcao) {
+        if ("1".equals(opcao)){
             return true;
         }
         return false;
-    }
-
-    private static void excluir(String dados) {
-        iClienteDAO.excluir(Long.parseLong(dados));
-        JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso");
-    }
-
-    private static void sair() {
-        JOptionPane.showMessageDialog(null, "Saindo do sistema...", "Saída", JOptionPane.INFORMATION_MESSAGE);
-        System.exit(0);
     }
 
     private static boolean isOpcaoSair(String opcao) {
@@ -91,6 +87,11 @@ public class App {
         return false;
     }
 
+    private static void sair() {
+        JOptionPane.showMessageDialog(null, "Saindo do sistema...", "Saída", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
+
     private static boolean isOpcaoValida(String opcao) {
         if ("1".equals(opcao) || "2".equals(opcao)
                 || "3".equals(opcao) || "4".equals(opcao) || "5".equals(opcao)) {
@@ -98,7 +99,17 @@ public class App {
         } else
             return false;
     }
+
+    private static boolean isOpcaoCadastro(String opcao) {
+        if ("1".equals(opcao)) {
+            return true;
+        }
+        return false;
+    }
 }
+
+
+
 
 
 
